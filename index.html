@@ -97,7 +97,10 @@ function go(n){if(lock||n<0||n>=pages.length||n==cur)return;lock=1;const f=n>cur
 $('#nx').onclick=()=>go(cur+1);$('#pv').onclick=()=>go(cur-1);
 addEventListener('keydown',e=>{if(e.key=='ArrowRight')go(cur+1);if(e.key=='ArrowLeft')go(cur-1)});
 let tx=0;pg.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});pg.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
-$('#openB').onclick=()=>{startMusic();idb('get').then(b=>{if(b)playCustom(b)});$('#cover').classList.add('open');setTimeout(()=>{$('#app').style.display='flex';render()},900)};
+$('#openB').onclick=()=>{startMusic();
+au=new Audio('Ten2Five_-_Hanya_Untukmu__Official_Audio_Lyric_(48k).mp3');au.loop=true;au.volume=.6;
+if(ac)ac.suspend();au.play().catch(()=>{});on=true;lab();
+$('#cover').classList.add('open');setTimeout(()=>{$('#app').style.display='flex';render()},900)};
 document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>b.closest('.pane').classList.remove('on'));
 const pane=id=>$(id).classList.add('on');
 $('#bToc').onclick=()=>{$('#tocL').innerHTML='';pages.forEach((d,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+d.c+(d.t?' — '+d.t:'');b.onclick=()=>{$('#pToc').classList.remove('on');cur=i;render()};$('#tocL').appendChild(b)});pane('#pToc')};
