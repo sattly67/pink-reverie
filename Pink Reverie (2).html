@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><title>Pink Reverie</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--pk:#F8DDE8;--sp:#F4BFD0;--bl:#EFA6BE;--dr:#C9829D;--paper:#FFF9F7;--iv:#F7F0E9;--rose:#75485B;--ink:#453540;--lav:#DCD4F2;--bg:#F4BFD0;--bg2:#F8DDE8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#3a2832;--bg2:#2c1f27;--paper:#4a3640;--iv:#3f2e37;--ink:#f6e8ee;--rose:#efc3d3;--pk:#5a4150;--sp:#6b4b5e}}
+*{box-sizing:border-box}html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;height:100%;font:16px/1.7 'DM Sans',system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,var(--bg2),var(--bg));overflow:hidden}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:500;margin:0;color:var(--rose)}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+button{font:inherit;cursor:pointer;border:1px solid var(--dr);background:transparent;color:var(--rose);padding:.55em 1.1em;border-radius:4px;transition:.25s}
+button:hover:not(:disabled){background:var(--dr);color:#fff;transform:translateY(-1px)}button:disabled{opacity:.35;cursor:default}
+input,textarea{font:inherit;width:100%;padding:.5em;border:1px solid var(--dr);border-radius:4px;background:var(--paper);color:var(--ink);margin:.2em 0 .7em}
+#petals i{position:fixed;top:-20px;width:10px;height:13px;background:var(--bl);opacity:.6;border-radius:70% 0 70% 0;animation:fall linear infinite;pointer-events:none;z-index:50}
+@keyframes fall{to{transform:translate(60px,110vh) rotate(540deg)}}
+#cover{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;perspective:1400px;z-index:20;transition:opacity 1s}
+.cv{width:min(86vw,360px);height:min(76vh,520px);background:linear-gradient(180deg,#e8a3bd 0%,#f4bfd0 45%,#fbe3d6 100%);border-radius:4px 10px 10px 4px;box-shadow:-10px 14px 40px #75485b66,inset 8px 0 14px #75485b33;position:relative;transform-origin:left;transition:transform 1.6s cubic-bezier(.6,.1,.2,1);text-align:center;padding:2.2rem 1.4rem;color:#fff9f7;overflow:hidden}
+.cv:before{content:"";position:absolute;inset:12px;border:1px solid #fff9f7aa;pointer-events:none}
+.cv h1{color:#fff9f7;font-size:2.3rem;letter-spacing:.18em;margin-top:1rem;animation:up 1.4s .2s both}
+.cv p{animation:up 1.4s .6s both;margin:.5rem 0}.cv .sm{font-size:.8rem;letter-spacing:.1em;opacity:.9;animation-delay:1s}
+.cv svg{position:absolute;left:0;bottom:0;width:100%}
+.cv button{position:relative;z-index:2;margin-top:1rem;background:#fff9f7;color:var(--rose);border:0;animation:up 1.4s 1.3s both}
+#cover.open .cv{transform:rotateY(-110deg)}#cover.open{opacity:0;pointer-events:none;transition-delay:.9s}
+@keyframes up{from{opacity:0;transform:translateY(14px)}}
+#app{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:10px}
+.top{width:min(100%,640px);display:flex;justify-content:space-between;align-items:center;font-size:.85rem}.top button{padding:.3em .7em;font-size:.82rem}
+#bar{width:min(100%,640px);height:3px;background:var(--pk);border-radius:2px}#bar i{display:block;height:100%;width:0;background:var(--dr);transition:width .5s}
+#book{width:min(100%,640px);flex:1;max-height:640px;perspective:1600px;position:relative}
+#pg{position:absolute;inset:0;background:linear-gradient(90deg,var(--iv),var(--paper) 8%);border-radius:4px 8px 8px 4px;box-shadow:-6px 10px 30px #75485b44;padding:1.6rem 1.5rem 2.6rem 2rem;overflow:auto;transform-origin:left;transition:transform .38s ease,opacity .38s ease}
+#pg:before{content:"";position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,#75485b33,transparent);pointer-events:none}
+#pg.o1{transform:rotateY(-16deg);opacity:0}#pg.o2{transform:rotateY(10deg);opacity:0}
+.ch{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--dr)}
+#pg h2{font-size:1.5rem;margin:.3rem 0 1rem;animation:up .8s both}
+#pg p{margin:0 0 .9em;font-size:1.04rem;animation:up .9s both}#pg p:nth-of-type(2){animation-delay:.2s}#pg p:nth-of-type(3){animation-delay:.4s}
+.q{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.25rem;color:var(--rose);border-left:2px solid var(--bl);padding:.2rem 0 .2rem 1rem;margin:1.2rem 0;animation:up 1s .5s both}
+.pn{position:absolute;bottom:.8rem;left:0;right:0;text-align:center;font-size:.78rem;color:var(--dr)}
+.nav{width:min(100%,640px);display:flex;justify-content:space-between;gap:8px}.nav button{font-size:.88rem;flex:1}
+.pane{position:fixed;inset:0;background:#2c1f27aa;display:none;align-items:center;justify-content:center;z-index:40;padding:14px}
+.pane.on{display:flex}.box{background:var(--paper);width:min(100%,520px);max-height:88vh;overflow:auto;padding:1.3rem;border-radius:8px;position:relative;animation:up .5s both}
+.x{position:absolute;right:.6rem;top:.6rem;padding:.1em .6em}
+.toc button{display:block;width:100%;text-align:left;margin:.3rem 0;border-color:var(--pk)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:.6rem 0}.tabs button{font-size:.8rem;padding:.3em .6em}.tabs .a{background:var(--dr);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:.8rem 0}
+.card{aspect-ratio:3/4;perspective:500px;padding:0;border:0;background:none}.card b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:6px;backface-visibility:hidden;transition:transform .5s;font-size:1.7rem;font-weight:400}
+.card{position:relative}.card .f{background:var(--sp);color:var(--paper)}.card .bk{background:var(--pk);color:var(--rose);transform:rotateY(180deg)}
+.card.up .f{transform:rotateY(180deg)}.card.up .bk{transform:rotateY(0)}.card.ok .bk{background:var(--lav)}
+.opts button{display:block;width:100%;text-align:left;margin:.35rem 0}.good{background:#dcd4f2!important;color:var(--ink)!important}.bad{opacity:.5}
+#fin{text-align:center}#fin .l{opacity:0;transition:opacity 2.2s;margin:.9em 0}#fin .l.v{opacity:1}
+.sun{position:absolute;inset:0;background:radial-gradient(circle at 50% 100%,#f4bfd066,transparent 70%);pointer-events:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#petals{display:none}}
+</style></head><body>
+<div id="petals"></div>
+<div id="cover"><div class="cv"><p class="serif sm">Sebuah novel digital</p><h1>PINK<br>REVERIE</h1><p class="serif" style="font-size:1.2rem;font-style:italic">Sebuah cerita yang akhirnya berani dituliskan.</p>
+<svg viewBox="0 0 360 150" aria-hidden="true"><circle cx="250" cy="90" r="34" fill="#fff9f7" opacity=".7"/><path d="M0 110 Q90 90 180 112 T360 105 V150H0Z" fill="#c9829d" opacity=".55"/><path d="M0 130 Q120 112 360 128 V150H0Z" fill="#75485b" opacity=".8"/><path d="M60 118h50v4H60zM66 122v14M104 122v14" stroke="#453540" stroke-width="3"/><g fill="#453540"><circle cx="80" cy="104" r="6"/><path d="M72 112h16v8H72z"/></g></svg>
+<p class="serif sm" style="position:absolute;bottom:3.4rem;left:0;right:0;color:#453540">Ditulis dari hal-hal yang tidak sempat diucapkan.</p>
+<button id="openB" style="position:absolute;left:50%;top:48%;transform:translateX(-50%)">Buka cerita</button></div></div>
+<div id="app"><div class="top"><span class="serif" style="font-size:1.1rem">Pink Reverie</span><span><button id="bToc">Daftar isi</button> <button id="bGame">Permainan</button> <button id="bSet">Atur</button> <button id="bMu">Musik: nyala</button></span></div>
+<div id="bar"><i></i></div><div id="book"><div id="pg"></div></div>
+<div class="nav"><button id="pv">← Halaman sebelumnya</button><button id="nx">Halaman berikutnya →</button></div></div>
+<div class="pane" id="pToc"><div class="box toc"><button class="x" data-x>×</button><h3>Daftar isi</h3><div id="tocL"></div></div></div>
+<div class="pane" id="pGame"><div class="box"><button class="x" data-x>×</button><h3>Permainan kecil</h3><div class="tabs" id="tabs"></div><div id="gb"></div></div></div>
+<div class="pane" id="pSet"><div class="box"><button class="x" data-x>×</button><h3>Personalisasi</h3><p style="font-size:.85rem">Semua isian opsional dan hanya disimpan di peramban ini (localStorage), tidak dikirim ke mana pun.</p>
+<label>Nama pengirim<input id="sS" placeholder="mis. namamu"></label><label>Panggilan penerima<input id="sR" placeholder="mis. nama panggilannya"></label><label>Dedikasi<input id="sD" placeholder="Untuk seseorang yang…"></label><label>Satu kenangan nyata (tulis sendiri)<textarea id="sM" rows="3" placeholder="Sesuatu kecil yang benar-benar terjadi"></textarea></label><label>Pesan terakhir (kosongkan untuk teks bawaan)<textarea id="sF" rows="4"></textarea></label>
+<button id="sv">Simpan</button> <button id="rs">Reset</button></div></div>
+<script>
+const $=s=>document.querySelector(s);let cfg={s:'',r:'',d:'',m:'',f:''},cur=0,lock=0;
+try{Object.assign(cfg,JSON.parse(localStorage.getItem('pr_cfg')||'{}'));cur=+localStorage.getItem('pr_pg')||0}catch(e){}
+const R=()=>cfg.r||'kamu';
+const P=()=>[
+{c:'Prolog',t:'Sebelum Kata-Kata Menemukan Jalannya',p:['Ada hal-hal yang kita simpan terlalu lama, sampai lupa apakah ia masih milik kita atau sudah menjadi bagian dari rumah. Begitulah aku menyimpan sesuatu, di laci yang jarang kubuka.','Malam ini laci itu kubuka pelan-pelan. Bukan untuk menumpahkan segalanya, hanya untuk menuliskannya dengan jujur.'],q:'Barangkali tidak semua yang tersimpan perlu tetap sunyi.'},
+{c:'Prolog',t:'Untuk Siapa Halaman Ini',p:[cfg.d||'Untuk seseorang yang namanya kini tinggal di sela-sela hariku.','Cerita ini bukan sepenuhnya milikku. Seorang temanku menitipkannya, sebab ia belum menemukan cara untuk mengucapkannya sendiri. Aku hanya meminjamkan tangan untuk menuliskannya, dan di halaman-halaman berikut, “aku” adalah dia.','Kalau kamu sedang membaca ini, ketahuilah: tidak ada yang harus kamu lakukan selain membaca sesukamu, secepat atau selambat yang kamu mau.']},
+{c:'Bab I',t:'Hal-Hal Kecil yang Tinggal',p:['Aku tidak tahu kapan tepatnya namamu mulai tinggal lebih lama di pikiranku. Tidak ada peristiwa besar yang bisa kutunjuk. Barangkali memang begitu cara beberapa hal menjadi berarti: datang tanpa suara, lalu menetap tanpa meminta izin.','Yang kuingat justru yang remeh: cara '+R()+' menyela dengan tawa kecil, cara perhatian itu tiba tepat ketika aku mengira tak ada yang melihat.'],q:'Ingatan sering memilih hal-hal paling kecil untuk dijadikan rumah.'},
+{c:'Bab I',t:'Cahaya di Atas Meja',p:[cfg.m||'[Ruang ini untuk satu kenangan nyata. Tulislah di menu Atur.]','Sore itu cahaya jatuh di atas meja, dan percakapan kita berjalan biasa saja. Justru karena biasa, ia tidak mau pergi.']},
+{c:'Bab II',t:'Di Antara Biasa dan Istimewa',p:['Ada garis tipis antara teman bicara dan seseorang yang diam-diam ditunggu kabarnya. Aku tidak sadar kapan kakiku melangkah melewatinya.','Hari-hariku tetap berjalan: pekerjaan, buku, langkah pulang. Hidupku utuh tanpa perlu dilengkapi siapa pun. Hanya saja, ada satu sudut yang kini terasa lebih hangat.'],q:'Menyadari bukan berarti menuntut. Kadang ia hanya duduk di sebelahmu.'},
+{c:'Bab II',t:'Hujan di Jendela',p:['Hujan sore itu mengetuk kaca seperti tamu yang tahu cara bersabar. Aku memperhatikannya dan bertanya pada diri sendiri: sejak kapan aku mulai menyebut sesuatu sebagai “istimewa” tanpa merasa perlu berdebat?','Aku tidak ingin terburu-buru menamainya. Nama bisa menyempitkan, dan aku ingin perasaan ini bernapas dulu.']},
+{c:'Bab III',t:'Hal yang Tidak Pandai Kuucapkan',p:['Aku takut salah paham. Aku takut kata-kataku terdengar lebih besar dari maksudku, atau lebih kecil dari kenyataannya.','Maka aku berlatih dalam kepala: kalimat pembuka, kalimat penutup, dan bagian tengah yang selalu runtuh. Keberanian ternyata tidak tampil sebagai badai. Ia lebih mirip satu napas panjang sebelum membuka pintu.'],q:'Ragu bukan tanda bahwa perasaan itu salah. Ia hanya tanda bahwa perasaan itu penting.'},
+{c:'Bab III',t:'Surat yang Terlipat',p:['Jika perasaan adalah surat, barangkali aku terlalu lama membiarkannya terlipat di dalam laci. Bukan karena aku tidak ingin mengirimkannya, melainkan karena aku sedang belajar menerima bahwa sebuah surat tidak pernah bisa menentukan ke mana jawabannya akan berlabuh.','Dan aku memutuskan, itu bukan alasan cukup untuk menyimpannya selamanya.']},
+{c:'Bab III',t:'Atas Nama Seorang Teman',p:['Ada satu hal yang harus kuakui lebih awal. Aku pernah bilang bahwa ada temanku yang menyukaimu. Teman yang kusebut itu sebenarnya aku.','Waktu itu aku belum cukup percaya diri untuk mengatakannya sebagai diriku sendiri, jadi kubilang saja “temanku”. Aku tidak bermaksud membohongimu. Aku hanya takut, dan rasa takut ternyata pandai mencari jalan memutar.','Maaf kalau itu membingungkan. Mulai halaman ini, aku ingin berhenti bersembunyi di balik kata “temanku”.'],q:'Keberanian kadang dimulai dari mengakui bahwa kita pernah terlalu takut.'},
+{c:'Bab IV',t:'Seandainya Kamu Tahu',p:['Seandainya '+R()+' tahu, mungkin aku akan bercerita bahwa ada hari-hari ketika namamu hadir seperti lampu kecil di ujung lorong. Tidak menyilaukan, hanya cukup untuk membuatku tahu arah.','Aku ingin mengenalmu lebih jauh: apa yang membuatmu diam, apa yang membuatmu bersemangat, apa yang kamu bawa pulang setiap sore.'],q:'Mengenal seseorang itu seperti membaca buku: tidak perlu dihabiskan dalam semalam.'},
+{c:'Bab IV',t:'Langit Sore',p:['Langit sore sering berwarna seperti kelopak yang hampir gugur. Aku menyukainya karena ia tidak berusaha menjadi malam, dan tidak memaksa tetap siang.','Aku ingin perasaanku seperti itu: jujur pada warnanya sendiri, tanpa terburu-buru berubah menjadi sesuatu yang lain.']},
+{c:'Bab V',t:'Tanpa Meminta Balasan',p:['Perasaan tidak bisa dipaksakan, baik milikku maupun milikmu. Ia datang dengan caranya sendiri dan pergi dengan caranya sendiri.','Mengatakannya bukan berarti menagih. Ada perbedaan antara membuka pintu dan menarik seseorang masuk. Aku hanya ingin membuka pintu, lalu membiarkan angin menentukan sisanya.'],q:'Aku tidak menulis ini untuk mengubah pikiranmu.'},
+{c:'Bab V',t:'Hidup yang Tetap Berjalan',p:['Apa pun jawabannya nanti, aku akan tetap pulang melewati jalan yang sama, tetap membaca buku-bukuku, tetap tertawa pada hal-hal kecil. Hidupku punya isi sendiri, dan itu tidak berubah karena sebuah jawaban.','Itu sebabnya aku berani menulis sampai sini.']},
+{c:'Epilog',t:'Setelah Halaman Ini',p:['Terima kasih sudah membaca sampai di sini. Itu saja sudah merupakan kebaikan yang ingin kuingat.','Halaman berikutnya adalah yang terakhir. Bacalah kapan pun kamu siap. Tidak ada yang menunggu dengan tergesa.'],q:'Beberapa kalimat memang hanya perlu dituliskan, lalu diberi ruang.'},
+{c:'Halaman Terakhir',t:'',fin:1}];
+const fin=()=>['Aku menyukaimu.','Teman yang kusebut itu sebenarnya aku. Maaf, baru sekarang aku berani mengatakannya sebagai diriku sendiri.','Aku tidak tahu apakah perasaan ini akan menemukan tempat yang sama di hatimu. Aku juga tidak ingin berpura-pura bahwa menuliskannya membuatku sama sekali tidak gugup.','Aku menyukaimu bukan karena menganggapmu sempurna. Aku hanya menemukan sesuatu dalam dirimu yang membuatku ingin mengenalmu lebih jauh.','Kalau kamu juga ingin mencoba, aku akan senang berjalan pelan-pelan, tanpa terburu-buru. Kalau perasaanmu berbeda, aku akan menghormatinya.','Aku tidak menulis ini untuk meminta jawaban yang sudah kutentukan. Aku hanya ingin memberimu kesempatan mengetahui apa yang selama ini kusimpan.'];
+const pg=$('#pg');let pages=P(),tw=0;
+function render(){pages=P();tw++;const d=pages[cur];let h='<div class="ch">'+d.c+'</div>';
+if(d.fin){h+='<div id="fin"><div class="sun"></div><p class="serif" style="font-size:1.3rem;font-style:italic;margin-top:1.4rem">Yang tersimpan terlalu lama pada akhirnya akan mencari cahaya.</p><div id="fl"></div><div id="fb" style="display:none"><p style="font-size:.85rem">Tidak ada yang harus dijawab di sini. Kalau mau, tulis balasanmu sendiri; tulisan ini hanya ada di layarmu dan tidak dikirim ke mana pun.</p><textarea id="rp2" rows="4" placeholder="Tulis balasanmu di sini…"></textarea><button id="cp">Salin tulisan</button> <button id="rd">Baca dari awal</button><p id="rsp" class="serif" style="font-size:1.1rem"></p></div>'+'<p id="cr" class="serif" style="opacity:0;transition:opacity 2s;font-size:.9rem;letter-spacing:.1em;margin-top:1.6rem">Made by '+esc(cfg.s||'Satt')+', written on behalf of a friend</p></div>'}
+else{h+='<h2>'+d.t+'</h2>'+d.p.map(x=>'<p>'+esc(x)+'</p>').join('')+(d.q?'<div class="q">'+d.q+'</div>':'')}
+pg.innerHTML=h+'<div class="pn">'+(cur+1)+' / '+pages.length+'</div>';pg.scrollTop=0;
+$('#bar i').style.width=(cur+1)/pages.length*100+'%';$('#pv').disabled=!cur;$('#nx').disabled=cur==pages.length-1;
+try{localStorage.setItem('pr_pg',cur)}catch(e){}
+if(d.fin){const L=fin(),box=$('#fl'),tk=++tw,fast=matchMedia('(prefers-reduced-motion:reduce)').matches;L.forEach((x,i)=>{const e=document.createElement('p');e.className='l v'+(i?'':' serif');if(!i)e.style.fontSize='2rem';box.appendChild(e)});const ps=[...box.children],txt=L.map((x,i)=>i==L.length-1&&cfg.f?cfg.f:x);let a=0,b=0;const step=()=>{if(tk!=tw)return;if(a>=ps.length){$('#fb').style.display='block';$('#cr').style.opacity=1;return}b+=fast?999:1;ps[a].textContent=txt[a].slice(0,b)+(b<txt[a].length?'|':'');if(b>=txt[a].length){a++;b=0;setTimeout(step,fast?0:700)}else setTimeout(step,40)};setTimeout(step,1200);
+$('#cp').onclick=()=>{try{navigator.clipboard.writeText($('#rp2').value).then(()=>$('#rsp').textContent='Tersalin. Tempelkan ke mana pun kamu mau.')}catch(e){$('#rsp').textContent='Salin manual dari kotak di atas.'}};$('#rd').onclick=()=>go(0)}}
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function go(n){if(lock||n<0||n>=pages.length||n==cur)return;lock=1;const f=n>cur;pg.classList.add(f?'o1':'o2');setTimeout(()=>{cur=n;render();pg.classList.remove('o1','o2');lock=0},380)}
+$('#nx').onclick=()=>go(cur+1);$('#pv').onclick=()=>go(cur-1);
+addEventListener('keydown',e=>{if(e.key=='ArrowRight')go(cur+1);if(e.key=='ArrowLeft')go(cur-1)});
+let tx=0;pg.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});pg.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>60)go(cur+(d<0?1:-1))});
+$('#openB').onclick=()=>{startMusic();$('#cover').classList.add('open');setTimeout(()=>{$('#app').style.display='flex';render()},900)};
+document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>b.closest('.pane').classList.remove('on'));
+const pane=id=>$(id).classList.add('on');
+$('#bToc').onclick=()=>{$('#tocL').innerHTML='';pages.forEach((d,i)=>{const b=document.createElement('button');b.textContent=(i+1)+'. '+d.c+(d.t?' — '+d.t:'');b.onclick=()=>{$('#pToc').classList.remove('on');cur=i;render()};$('#tocL').appendChild(b)});pane('#pToc')};
+$('#bSet').onclick=()=>{sS.value=cfg.s;sR.value=cfg.r;sD.value=cfg.d;sM.value=cfg.m;sF.value=cfg.f;pane('#pSet')};
+$('#sv').onclick=()=>{cfg={s:sS.value,r:sR.value,d:sD.value,m:sM.value,f:sF.value};try{localStorage.setItem('pr_cfg',JSON.stringify(cfg))}catch(e){}$('#pSet').classList.remove('on');render()};
+$('#rs').onclick=()=>{cfg={s:'',r:'',d:'',m:'',f:''};try{localStorage.removeItem('pr_cfg')}catch(e){}$('#pSet').classList.remove('on');render()};
+/* games */
+const G=['Memory of Sakura','Letter from the Moon','Kuis Cerita'];let gi=0;
+$('#bGame').onclick=()=>{$('#tabs').innerHTML='';G.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>{gi=i;game()};$('#tabs').appendChild(b)});game();pane('#pGame')};
+function game(){[...$('#tabs').children].forEach((b,i)=>b.classList.toggle('a',i==gi));[mem,moon,quiz][gi]()}
+function mem(){const S=['✿','☾','✦','✉','❦','☂'],gb=$('#gb');let d=[...S,...S].sort(()=>Math.random()-.5),op=[],mv=0,ok=0,t0=0,tm;
+gb.innerHTML='<div id="st" style="font-size:.85rem">Langkah: 0 · Pasangan: 0/6 · 0 dtk</div><div class="grid"></div><button id="rp">Ulangi</button>';
+const gr=gb.querySelector('.grid'),st=$('#st');d.forEach(s=>{const c=document.createElement('button');c.className='card';c.innerHTML='<b class="f">❀</b><b class="bk">'+s+'</b>';c.onclick=()=>{if(op.length>1||c.classList.contains('up'))return;if(!t0){t0=Date.now();tm=setInterval(up,1000)}c.classList.add('up');op.push([c,s]);if(op.length==2){mv++;const[[a,x],[b,y]]=op;if(x==y){a.classList.add('ok');b.classList.add('ok');ok++;op=[];if(ok==6){clearInterval(tm);gr.insertAdjacentHTML('afterend','<p class="serif" style="font-size:1.2rem">Semua kelopak telah menemukan pasangannya. Dalam '+mv+' langkah.</p>')}}else setTimeout(()=>{a.classList.remove('up');b.classList.remove('up');op=[]},800);up()}};gr.appendChild(c)});
+function up(){st.textContent='Langkah: '+mv+' · Pasangan: '+ok+'/6 · '+(t0?Math.floor((Date.now()-t0)/1000):0)+' dtk'}$('#rp').onclick=()=>{clearInterval(tm);mem()}}
+function moon(){const M={Tenang:['Air yang diam bukan air yang kosong. Ia sedang menyimpan langit.','Tidak semua senyap perlu diisi. Sebagian cukup didengarkan.'],Bahagia:['Hari ini terasa seperti jendela yang akhirnya dibuka.','Kebahagiaan kecil sering datang membawa sandal, bukan sepatu pesta.'],Rindu:['Rindu adalah alamat yang terus ditulis meski belum ada kotak surat.','Ada orang yang jauhnya tidak diukur jarak, melainkan jumlah kalimat yang tertahan.'],Gugup:['Tangan yang gemetar tetap bisa menulis kalimat yang jujur.','Gugup hanyalah tubuh yang ikut menghormati sesuatu yang penting.'],Bingung:['Kabut tidak menghapus jalan. Ia hanya meminta langkah lebih pelan.','Tidak apa-apa belum tahu. Halaman kosong juga bagian dari buku.'],Berani:['Berani itu satu napas panjang, lalu pintu yang dibuka perlahan.','Kamu tidak harus tak takut. Cukup melangkah dengan takutmu.']};
+$('#gb').innerHTML='<p>Pilih suasana hatimu malam ini.</p><div class="opts" id="mo"></div><p id="mq" class="q" style="min-height:3em"></p>';
+Object.keys(M).forEach(k=>{const b=document.createElement('button');b.style.display='inline-block';b.style.width='auto';b.style.margin='.2rem';b.textContent=k;b.onclick=()=>{const q=$('#mq');q.style.opacity=0;setTimeout(()=>{q.textContent=M[k][Math.random()*2|0];q.style.transition='opacity .6s';q.style.opacity=1},250)};$('#mo').appendChild(b)})}
+function quiz(){const Q=[['Dalam cerita, apa fungsi suasana (hujan, senja, cahaya)?',['Hanya hiasan','Menguatkan perasaan tokoh','Mengganti dialog'],1,'Suasana adalah cara cerita membuat pembaca ikut merasakan.'],['Gaya anime slice-of-life biasanya berfokus pada…',['Momen sehari-hari yang tenang','Pertempuran besar','Kompetisi'],0,'Slice-of-life merayakan hal-hal kecil dalam hidup.'],['“Hatiku rumah yang pintunya terbuka” adalah contoh…',['Metafora','Fakta','Instruksi'],0,'Metafora menyamakan dua hal tanpa kata “seperti”.'],['Mengungkapkan perasaan yang sehat berarti…',['Menuntut jawaban','Jujur dan menghormati jawaban','Menunggu selamanya'],1,'Jujur tanpa menekan memberi kebebasan bagi kedua pihak.']];let i=0,sc=0;
+function show(){const gb=$('#gb');if(i>=Q.length){gb.innerHTML='<h3>Skor: '+sc+' / '+Q.length+'</h3><p>'+(sc>3?'Pembaca yang peka.':'Terus membaca, terus merasakan.')+'</p><button id="ag">Main lagi</button>';$('#ag').onclick=quiz;return}
+const q=Q[i];gb.innerHTML='<p style="font-size:.8rem">Pertanyaan '+(i+1)+'/'+Q.length+'</p><p>'+q[0]+'</p><div class="opts"></div><p id="ex" style="font-size:.9rem"></p>';q[1].forEach((o,j)=>{const b=document.createElement('button');b.textContent=o;b.onclick=()=>{if(b.parentNode.dataset.d)return;b.parentNode.dataset.d=1;const r=j==q[2];if(r)sc++;b.classList.add(r?'good':'bad');$('#ex').textContent=(r?'Tepat. ':'Belum tepat. ')+q[3];const n=document.createElement('button');n.textContent='Lanjut →';n.onclick=()=>{i++;show()};gb.appendChild(n)};gb.querySelector('.opts').appendChild(b)})}show()}
+let ac,mg,mt,on=false;
+function note(f,t,d,w,v){const o=ac.createOscillator(),g=ac.createGain();o.type=w;o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*.3,t+.4);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(mg);o.start(t);o.stop(t+d)}
+function startMusic(){if(ac)return;try{ac=new(window.AudioContext||window.webkitAudioContext)();mg=ac.createGain();mg.gain.value=.14;mg.connect(ac.destination);const ch=[[220,261.6,329.6],[174.6,220,261.6],[261.6,329.6,392],[196,246.9,293.7]],sc=[523.3,587.3,659.3,784,880];let i=0;const tick=()=>{const t=ac.currentTime;ch[i%4].forEach(f=>note(f,t,4.2,'sine',.5));for(let k=0;k<4;k++)if(Math.random()<.7)note(sc[Math.random()*5|0],t+k+.2,2,'triangle',.25);i++};tick();mt=setInterval(tick,4000);on=true}catch(e){}}
+$('#bMu').onclick=()=>{if(!ac)startMusic();else if(on){ac.suspend();on=false}else{ac.resume();on=true}$('#bMu').textContent='Musik: '+(on?'nyala':'mati')};
+/* petals */
+for(let i=0;i<12;i++){const p=document.createElement('i');p.style.left=Math.random()*100+'vw';p.style.animationDuration=9+Math.random()*9+'s';p.style.animationDelay=-Math.random()*14+'s';$('#petals').appendChild(p)}
+</script></body></html>
